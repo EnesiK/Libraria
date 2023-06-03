@@ -1,14 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { useEffect, useState } from "react";
-import BookModel from "../../models/BookModel";
-import { SpinnerLoading } from "../Utils/SpinnerLoading";
-import { SearchBook } from "./components/SearchBook";
-import { Pagination } from "../Utils/Pagination";
-
+import { useEffect, useState } from 'react';
+import BookModel from '../../models/BookModel';
+import { Pagination } from '../Utils/Pagination';
+import { SpinnerLoading } from '../Utils/SpinnerLoading';
+import { SearchBook } from './components/SearchBook';
 
 export const SearchBooksPage = () => {
+
     const [books, setBooks] = useState<BookModel[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [httpError, setHttpError] = useState(null);
@@ -18,7 +17,7 @@ export const SearchBooksPage = () => {
     const [totalPages, setTotalPages] = useState(0);
     const [search, setSearch] = useState('');
     const [searchUrl, setSearchUrl] = useState('');
-    const [categoryselection, setCategorySelection] = useState('Book category');
+    const [categorySelection, setCategorySelection] = useState('Book category');
 
     useEffect(() => {
         const fetchBooks = async () => {
@@ -98,10 +97,10 @@ export const SearchBooksPage = () => {
     const categoryField = (value: string) => {
         setCurrentPage(1);
         if (
-            value.toLowerCase() === 'fe' ||
-            value.toLowerCase() === 'be' ||
-            value.toLowerCase() === 'data' ||
-            value.toLowerCase() === 'devops' 
+            value.toLowerCase() === 'fe' || 
+            value.toLowerCase() === 'be' || 
+            value.toLowerCase() === 'data' || 
+            value.toLowerCase() === 'devops'
         ) {
             setCategorySelection(value);
             setSearchUrl(`/search/findByCategory?category=${value}&page=<pageNumber>&size=${booksPerPage}`)
@@ -120,52 +119,56 @@ export const SearchBooksPage = () => {
 
     return (
         <div>
-            < div className='row mt-5'>
-                <div className='col-6'>
-                    <div className='d-flex'>
-                        <input className='form-control me-2' type='search'
-                            placeholder='Search' aria-labelledby='Search'
-                            onChange={e => setSearch(e.target.value)} />
-                        <button className='btn btn-outline-success'
-                            onClick={() => searchHandleChange}>
-                            Search
-                        </button>
-                    </div>
-                </div>
-                <div className='col-4'>
-                    <div className='dropdown'>
-                        <button className='btn btn-secondary dropdown-toggle' type='button'
-                            id='dropdownMenuButton1' data-bs-toggle='dropdown'
-                            aria-expanded='false'>
-                            {categoryselection}
-                        </button>
-                        <ul className='dropdown-menu' aria-labelledby='dropwdownMenuButton1'>
-                            <li onClick={() => categoryField('All')}>
-                                <a className='dropdown-item' href='#'>
-                                    All
-                                </a>
-                            </li>
-                            <li onClick={() => categoryField('FE')}>
-                                <a className='dropdown-item' href='#'>
-                                    Front End
-                                </a>
-                            </li>
-                            <li onClick={() => categoryField('BE')}>
-                                <a className='dropdown-item' href='#'>
-                                    Back End
-                                </a>
-                            </li>
-                            <li onClick={() => categoryField('Data')}>
-                                <a className='dropdown-item' href='#'>
-                                    Data
-                                </a>
-                            </li>
-                            <li onClick={() => categoryField('DevOps')}>
-                                <a className='dropdown-item' href='#'>
-                                    DevOps
-                                </a>
-                            </li>
-                        </ul>
+            <div className='container'>
+                <div>
+                    <div className='row mt-5'>
+                        <div className='col-6'>
+                            <div className='d-flex'>
+                                <input className='form-control me-2' type='search'
+                                    placeholder='Search' aria-labelledby='Search'
+                                    onChange={e => setSearch(e.target.value)} />
+                                <button className='btn btn-outline-success'
+                                    onClick={() => searchHandleChange()}>
+                                    Search
+                                </button>
+                            </div>
+                        </div>
+                        <div className='col-4'>
+                            <div className='dropdown'>
+                                <button className='btn btn-secondary dropdown-toggle' type='button'
+                                    id='dropdownMenuButton1' data-bs-toggle='dropdown'
+                                    aria-expanded='false'>
+                                    {categorySelection}
+                                </button>
+                                <ul className='dropdown-menu' aria-labelledby='dropdownMenuButton1'>
+                                    <li onClick={() => categoryField('All')}>
+                                        <a className='dropdown-item' href='#'>
+                                            All
+                                        </a>
+                                    </li>
+                                    <li onClick={() => categoryField('FE')}>
+                                        <a className='dropdown-item' href='#'>
+                                            Front End
+                                        </a>
+                                    </li>
+                                    <li onClick={() => categoryField('BE')}>
+                                        <a className='dropdown-item' href='#'>
+                                            Back End
+                                        </a>
+                                    </li>
+                                    <li onClick={() => categoryField('Data')}>
+                                        <a className='dropdown-item' href='#'>
+                                            Data
+                                        </a>
+                                    </li>
+                                    <li onClick={() => categoryField('DevOps')}>
+                                        <a className='dropdown-item' href='#'>
+                                            DevOps
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                     {totalAmountOfBooks > 0 ?
                         <>
@@ -182,10 +185,10 @@ export const SearchBooksPage = () => {
                         :
                         <div className='m-5'>
                             <h3>
-                                Can't find what are you looking for?
+                                Can't find what you are looking for?
                             </h3>
                             <a type='button' className='btn main-color btn-md px-4 me-md-2 fw-bold text-white'
-                                href='#'>Library Servecises</a>
+                                href='#'>Library Services</a>
                         </div>
                     }
                     {totalPages > 1 &&

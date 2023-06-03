@@ -1,13 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-redeclare */
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import { ReturnBook } from "./ReturnBook";
 import { useEffect, useState } from "react";
 import BookModel from "../../../models/BookModel";
 import { SpinnerLoading } from "../../Utils/SpinnerLoading";
+import { Link } from "react-router-dom";
 
-
-/* eslint-disable jsx-a11y/alt-text */
 export const Carousel = () => {
 
     const [books, setBooks] = useState<BookModel[]>([]);
@@ -30,7 +26,7 @@ export const Carousel = () => {
 
             const responseData = responseJson._embedded.books;
 
-            const loadedBooks: BookModel[] =[];
+            const loadedBooks: BookModel[] = [];
 
             for (const key in responseData) {
                 loadedBooks.push({
@@ -71,10 +67,10 @@ export const Carousel = () => {
     return (
         <div className='container mt-5' style={{ height: 550 }}>
             <div className='homepage-carousel-title'>
-                <h3>Find your next "I stayed up too late reading" book,</h3>
+                <h3>Find your next "I stayed up too late reading" book.</h3>
             </div>
-            <div id='carouselExampleControls' className='carousel carousel-dark slide mt-5
-            d-none d-lg-block' data-bs-interval='false'>
+            <div id='carouselExampleControls' className='carousel carousel-dark slide mt-5 
+                d-none d-lg-block' data-bs-interval='false'>
 
                 {/* Desktop */}
                 <div className='carousel-inner'>
@@ -118,8 +114,8 @@ export const Carousel = () => {
                     <ReturnBook book={books[7]} key={books[7].id}/>
                 </div>
             </div>
-            <div className='homepage-corousel-title mt-3'>
-                <a className='btn btn-outline-secondary btn-lg' href='#'>View More</a>
+            <div className='homepage-carousel-title mt-3'>
+                <Link className='btn btn-outline-secondary btn-lg' to='/search'>View More</Link>
             </div>
         </div>
     );
